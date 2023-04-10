@@ -17,7 +17,8 @@ local plugins = {
     },
     config = function() 
       require("flutter-tools").setup {}
-    end
+    end,
+    ft = "dart",
   },
   {
     "natecraddock/workspaces.nvim",
@@ -34,7 +35,6 @@ local plugins = {
     "neovim/nvim-lspconfig",
     config = function()
       require "plugins.configs.lspconfig"
-      require "custom.configs.lspconfig"
     end,  
   },
   {
