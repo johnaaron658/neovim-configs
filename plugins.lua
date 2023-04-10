@@ -29,22 +29,9 @@ local plugins = {
         open = "Telescope find_files",
       },
     }
+    require("telescope").load_extension("workspaces")
     end,
   },
-  {
-    "neovim/nvim-lspconfig",
-    config = function()
-      require "plugins.configs.lspconfig"
-    end,  
-  },
-  {
-    "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {
-        "dartls",
-      },
-    },
-  }
 }
 
 return plugins
