@@ -29,9 +29,24 @@ local plugins = {
         open = "Telescope find_files",
       },
     }
-    require("telescope").load_extension("workspaces")
     end,
   },
+  -- {
+  --   "folke/tokyonight.nvim",
+  --   config = function()
+  --     require("tokyonight").setup({
+  --       style = "night"
+  --     })
+  --   end
+  -- },
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({})
+    end,
+  }
 }
 
 return plugins
