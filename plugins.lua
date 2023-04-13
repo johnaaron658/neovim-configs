@@ -1,52 +1,93 @@
+local overrides = require("custom.configs.overrides")
+
+---@type NvPluginSpec[]
 local plugins = {
+
+  -- Override plugin definition options
+
   {
-    "dart-lang/dart-vim-plugin",
-    ft = "dart",
+    "neovim/nvim-lspconfig",
+    dependencies = {
+      -- format & linting
+      {
+        "jose-elias-alvarez/null-ls.nvim",
+        config = function()
+          require "custom.configs.null-ls"
+        end,
+      },
+    },
+    config = function()
+      require "plugins.configs.lspconfig"
+      require "custom.configs.lspconfig"
+    end, -- Override to setup mason-lspconfig
+  },
+
+  -- override plugin configs
+  {
+    "williamboman/mason.nvim",
+    opts = overrides.mason
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = overrides.treesitter,
+  },
+
+  {
+    "nvim-tree/nvim-tree.lua",
+    opts = overrides.nvimtree,
+  },
+  --
+  -- Install a plugin
+  {
+    "max397574/better-escape.nvim",
+    event = "InsertEnter",
+    config = function()
+      require("better_escape").setup()
+    end,
   },
   {
-    'nvim-lua/plenary.nvim',
+    "natecraddock/sessions.nvim",
+    config = function()
+      require("sessions").setup({
+        events = { "VimLeavePre", "WinEnter", "BufEnter" },
+        session_filepath = vim.fn.stdpath("data") .. "/sessions",
+        absolute = true,
+      })
+    end,
+    lazy = false,
   },
   {
-    'stevearc/dressing.nvim', -- optional for vim.ui.select
+    "nvim-tree/nvim-tree.lua",
+    cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeOpen", },
+    lazy = false,
+  },
+  {
+    "natecraddock/workspaces.nvim",
+    cmd = { "SessionsSave", "SessionsLoad", "SessionsStop", },
+    config = function()
+      require("workspaces").setup({
+          hooks = {
+          open = { 
+              "NvimTreeOpen", 
+              "Telescope find_files", 
+              function()
+                require("sessions").load(vim.fn.stdpath("data") .. "/sessions", { silent = true })
+              end,
+          },
+        }
+      })
+    end,
+    lazy = false,
   },
   {
     'akinsho/flutter-tools.nvim',
+    lazy = false,
     dependencies = {
         'nvim-lua/plenary.nvim',
         'stevearc/dressing.nvim', -- optional for vim.ui.select
     },
-    config = function() 
-      require("flutter-tools").setup {}
-    end,
-    ft = "dart",
   },
-  {
-    "natecraddock/workspaces.nvim",
-    cmd = { "WorkspacesList", "WorkspacesAdd", "WorkspacesOpen", "WorkspacesRemove" },
-    config = function()
-    require("workspaces").setup {
-      hooks = {
-        open = "Telescope find_files",
-      },
-    }
-    end,
-  },
-  -- {
-  --   "folke/tokyonight.nvim",
-  --   config = function()
-  --     require("tokyonight").setup({
-  --       style = "night"
-  --     })
-  --   end
-  -- },
-  {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function()
-      require("copilot").setup({})
-    end,
-  }
 }
 
 return plugins
