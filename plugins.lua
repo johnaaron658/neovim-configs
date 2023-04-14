@@ -2,6 +2,7 @@
 local plugins = {
   {
     "natecraddock/sessions.nvim",
+    cmd = { "SessionsSave", "SessionsLoad", "SessionsStop", },
     config = function()
       require("sessions").setup({
         events = { "VimLeavePre", "WinEnter", "BufEnter" },
@@ -18,16 +19,12 @@ local plugins = {
   },
   {
     "natecraddock/workspaces.nvim",
-    cmd = { "SessionsSave", "SessionsLoad", "SessionsStop", },
     config = function()
       require("workspaces").setup({
           hooks = {
           open = { 
               "NvimTreeOpen", 
               "Telescope find_files", 
-              function()
-                require("sessions").load(vim.fn.stdpath("data") .. "/sessions", { silent = true })
-              end,
           },
         }
       })
@@ -91,6 +88,12 @@ local plugins = {
         -- },
       }
     end,
+  },
+  {
+    'karb94/neoscroll.nvim',
+    config = function()
+      require('neoscroll').setup()
+    end
   },
 }
 
