@@ -4,13 +4,25 @@ local M = {}
 M.general = {
   n = {
     ["<leader>p"] = { ":", "enter command mode", opts = { nowait = true } },
-    ["<A-q>"] = { ":noh <CR>", "escpape", opts = { nowait = true } },
+    ["<A-q>"] = { "<CMD> noh <CR>", "escape", opts = { nowait = true } },
+    ["<A-q>q"] = { "<CMD> qa <CR>", "escape", opts = { nowait = true } },
     ["q"] = { ":noh <CR>", "escape", opts = { nowait = true } },
     ["<A-a>"] = { "<C-w>h", "window left" },
     ["<A-d>"] = { "<C-w>l", "window right" },
     ["<A-s>"] = { "<C-w>j", "window down" },
     ["<A-w>"] = { "<C-w>k", "window up" },
+    ["<C-s>"] = { "<cmd> w! <CR> <cmd> SessionsSave <CR>", "save file" },
+    ["<A-e>"] = { function()
+                    require("telescope").extensions.flutter.commands()
+                  end,
+                  "flutter run",
+                },
+    ["<leader>j"] = { "<cmd> split <CR>", "horizontal split" },
     ["<leader>l"] = { "<cmd> vsplit <CR>", "vertical split" },
+    ["<leader>k"] = { "<C-w>q", "close horizontal split" },
+    ["<leader>h"] = { "<C-w>q", "close vertical split" },
+    ["<leader>ww"] = { "<cmd> WorkspacesOpen <CR>", "open workspace" },
+    ["<leader>ws"] = { "<cmd> SessionsLoad <CR>", "open last session" },
     ["<leader>["] = { "<cmd> Telescope find_files <CR>", "find files" },
     ["<C-_>"] = {
       function()
