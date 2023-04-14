@@ -1,51 +1,5 @@
-local overrides = require("custom.configs.overrides")
-
 ---@type NvPluginSpec[]
 local plugins = {
-
-  -- Override plugin definition options
-
-  {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      -- format & linting
-      {
-        "jose-elias-alvarez/null-ls.nvim",
-        config = function()
-          require "custom.configs.null-ls"
-        end,
-      },
-    },
-    config = function()
-      require "plugins.configs.lspconfig"
-      require "custom.configs.lspconfig"
-    end, -- Override to setup mason-lspconfig
-  },
-
-  -- override plugin configs
-  {
-    "williamboman/mason.nvim",
-    opts = overrides.mason
-  },
-
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = overrides.treesitter,
-  },
-
-  {
-    "nvim-tree/nvim-tree.lua",
-    opts = overrides.nvimtree,
-  },
-  --
-  -- Install a plugin
-  {
-    "max397574/better-escape.nvim",
-    event = "InsertEnter",
-    config = function()
-      require("better_escape").setup()
-    end,
-  },
   {
     "natecraddock/sessions.nvim",
     config = function()
@@ -81,12 +35,62 @@ local plugins = {
     lazy = false,
   },
   {
+    'nvim-lua/plenary.nvim',
+  },
+  {
+    'stevearc/dressing.nvim', -- optional for vim.ui.select
+  },
+  {
     'akinsho/flutter-tools.nvim',
     lazy = false,
     dependencies = {
         'nvim-lua/plenary.nvim',
         'stevearc/dressing.nvim', -- optional for vim.ui.select
     },
+    config = function()
+      require("flutter-tools").setup {
+        ui = {
+          border = "rounded",
+          notification_style = "native",
+        },
+        decorations = {
+          statusline = {
+            app_version = false,
+            device = true,
+          },
+        },
+        widget_guides = {
+          enabled = true,
+        },
+        closing_tags = {
+          highlight = "ErrorMsg",
+          prefix = "//",
+          enabled = true,
+        },
+        lsp = {
+          color = {
+            enabled = false,
+            background = false,
+            foreground = false,
+            virtual_text = true,
+            virtual_text_str = "■",
+          },
+          settings = {
+            showTodos = true,
+            completeFunctionCalls = true,
+            enableSnippets = true,
+          },
+        },
+        debugger = {
+          enabled = true,
+          run_via_dap = false,
+        },
+        -- dev_log = {
+        --   enabled = true,
+        --   open_cmd = "tabedit", -- command to use to open the log buffer
+        -- },
+      }
+    end,
   },
 }
 
