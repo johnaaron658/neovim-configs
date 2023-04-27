@@ -1,13 +1,25 @@
 ---@type NvPluginSpec[]
 local plugins = {
   {
+    "neovim/nvim-lspconfig",
+     dependencies = {
+       "jose-elias-alvarez/null-ls.nvim",
+       config = function()
+         require "custom.configs.null-ls"
+       end,
+     },
+     config = function()
+        require "plugins.configs.lspconfig"
+        require "custom.configs.lspconfig"
+     end,
+  },
+  {
     "natecraddock/sessions.nvim",
     cmd = { "SessionsSave", "SessionsLoad", "SessionsStop", },
     config = function()
       require("sessions").setup({
         events = { "VimLeavePre", "WinEnter", "BufEnter" },
-        session_filepath = vim.fn.stdpath("data") .. "/sessions",
-        absolute = true,
+        session_filepath = ".nvim/session",
       })
     end,
     lazy = false,
@@ -22,9 +34,10 @@ local plugins = {
     config = function()
       require("workspaces").setup({
           hooks = {
-          open = { 
-              "NvimTreeOpen", 
-              "Telescope find_files", 
+          open = {
+              "NvimTreeOpen",
+              "Telescope find_files",
+              "SessionsLoad",
           },
         }
       })
@@ -39,7 +52,6 @@ local plugins = {
   },
   {
     'akinsho/flutter-tools.nvim',
-    lazy = false,
     dependencies = {
         'nvim-lua/plenary.nvim',
         'stevearc/dressing.nvim', -- optional for vim.ui.select
@@ -94,6 +106,13 @@ local plugins = {
     config = function()
       require('neoscroll').setup()
     end
+  },
+  {
+   'github/copilot.vim',
+    config = function ()
+      require('copilot').setup {}
+    end,
+    cmd = {"Copilot"}
   },
 }
 
