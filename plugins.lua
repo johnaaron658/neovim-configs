@@ -1,3 +1,5 @@
+local overrides = require("custom.configs.overrides")
+
 ---@type NvPluginSpec[]
 local plugins = {
   {
@@ -24,6 +26,22 @@ local plugins = {
     end,
     lazy = false,
   },
+  -- override plugin configs
+  {
+    "williamboman/mason.nvim",
+    opts = overrides.mason
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = overrides.treesitter,
+  },
+
+  {
+    "nvim-tree/nvim-tree.lua",
+    opts = overrides.nvimtree,
+  },
+
   {
     "nvim-tree/nvim-tree.lua",
     cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeOpen", },
