@@ -9,16 +9,16 @@ M.treesitter = {
     "javascript",
     "typescript",
     "tsx",
-    -- "c",
+    "c",
     "markdown",
-    -- "markdown_inline",
+    "markdown_inline",
     "c_sharp",
   },
   indent = {
     enable = true,
-    -- disable = {
-    --   "python"
-    -- },
+    disable = {
+      "python"
+    },
   },
 }
 
@@ -38,7 +38,7 @@ M.mason = {
     -- c/cpp stuff
     "clangd",
     "clang-format",
-    
+
     -- csharp stuff
     "csharp-language-server",
   },
@@ -46,9 +46,9 @@ M.mason = {
 
 -- git support in nvimtree
 M.nvimtree = {
-  -- git = {
-  --   enable = true,
-  -- },
+  git = {
+    enable = true,
+  },
 
   renderer = {
     highlight_git = true,
