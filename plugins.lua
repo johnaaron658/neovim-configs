@@ -36,16 +36,9 @@ local plugins = {
     "nvim-treesitter/nvim-treesitter",
     opts = overrides.treesitter,
   },
-
   {
     "nvim-tree/nvim-tree.lua",
     opts = overrides.nvimtree,
-  },
-
-  {
-    "nvim-tree/nvim-tree.lua",
-    cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeOpen", },
-    lazy = false,
   },
   {
     "natecraddock/workspaces.nvim",
@@ -122,7 +115,9 @@ local plugins = {
   {
     'karb94/neoscroll.nvim',
     config = function()
-      require('neoscroll').setup()
+      require('neoscroll').setup({
+        easing_function = "cubic",
+      })
     end
   },
   {

@@ -72,7 +72,7 @@ M.general = {
       "lsp definition type",
     },
 
-    ["<leader>ra"] = {
+    ["<F2>"] = {
       function()
         require("nvchad_ui.renamer").open()
       end,
