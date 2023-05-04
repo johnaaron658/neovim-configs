@@ -127,6 +127,10 @@ local plugins = {
     end,
     cmd = {"Copilot"}
   },
+  {
+    'f-person/git-blame.nvim',
+    cmd = {'GitBlameToggle', 'GitBlameEnable', 'GitBlameDisable',}
+  }
 }
 
 return plugins
