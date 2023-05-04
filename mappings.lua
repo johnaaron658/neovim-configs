@@ -21,6 +21,19 @@ M.general = {
     ["<A-l>"] = { "<cmd> vsplit <CR>", "vertical split" },
     ["<A-k>"] = { "<C-w>q", "close horizontal split" },
     ["<A-h>"] = { "<C-w>q", "close vertical split" },
+    ["<A-u>"] = {
+      function()
+        require("nvterm.terminal").toggle "horizontal"
+      end,
+      "toggle horizontal term",
+    },
+
+    ["<A-o>"] = {
+      function()
+        require("nvterm.terminal").toggle "vertical"
+      end,
+      "toggle vertical term",
+    },
     ["<leader>ww"] = { "<cmd> WorkspacesOpen <CR>", "open workspace" },
     ["<leader>ws"] = { "<cmd> SessionsLoad <CR>", "open last session" },
     ["<leader>["] = { "<cmd> Telescope find_files <CR>", "find files" },
@@ -153,6 +166,21 @@ M.general = {
     ["<C-_>"] = {
       "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
       "toggle comment",
+    },
+  },
+  t = {
+    ["<A-u>"] = {
+      function()
+        require("nvterm.terminal").toggle "horizontal"
+      end,
+      "toggle horizontal term",
+    },
+
+    ["<A-o>"] = {
+      function()
+        require("nvterm.terminal").toggle "vertical"
+      end,
+      "toggle vertical term",
     },
   }
 }
