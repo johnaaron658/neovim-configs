@@ -36,11 +36,11 @@ M.mason = {
     "prettier",
 
     -- c/cpp stuff
-    "clangd",
-    "clang-format",
+    -- "clangd",
+    -- "clang-format",
 
     -- csharp stuff
-    "csharp-language-server",
+    -- "csharp-language-server",
   },
 }
 
